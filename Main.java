@@ -45,33 +45,37 @@ public class Main
     int sum = 0;
     boolean multipleModes = false;
     double average = 0;
+    int modeCounter = 0;
     int mode = 0;
 
     for (int i = 0; i < arr.size(); i++) {
       sum += arr.get(i);
-      int tempMode = 0;
-      for (int k = 0; i < arr.size(); i++) {
-        if (arr.get(i) == arr.get(k)) {
+      int tempMode = 1;
+      for (int k = i+1; k < arr.size(); k++) {
+        if (arr.get(i).equals(arr.get(k))) {
           tempMode++;
         }
       }
 
-      if (tempMode > mode) {
-        mode = tempMode;
+      if (tempMode > modeCounter) {
+        modeCounter = tempMode;
+        mode = arr.get(i);
         multipleModes = false;
-      } else if (tempMode == mode) {
+      } else if (tempMode == modeCounter && !multipleModes) {
         multipleModes = true;
       }
+      
+
     }
 
     average = (double) sum / arr.size();
 
     System.out.println("Sum: " + sum);
     System.out.println("Average: " + average);
-    if (multipleModes == false) {
+    if (!multipleModes) {
       System.out.println("Mode: " + mode);
     } else {
-      System.out.println("MOde: no singular mode");
+      System.out.println("Mode: no singular mode");
     }
 
   }
